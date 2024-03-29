@@ -56,7 +56,7 @@
           <tr>
             <td>
                 <h2 class="subtitle">
-                    A way to use the complete data for off-policy updates instead of subsampling would be increase the number of mini-epochs in an epoch and then use on-policy data combined with different off-policy data in each mini-epoch. By appropriately setting the number of mini-epochs, we can use the complete off-policy data. We find that using the complete data does not lead to any additional performance gains, but could make the algorithm more unstable due to increased number of updates per data collection rollout
+                    A way to use the complete data for off-policy updates instead of subsampling would be increase the number of mini-epochs in an epoch and then use on-policy data combined with different off-policy data in each mini-epoch. By appropriately setting the number of mini-epochs, we can use the complete off-policy data. We find that using the complete data does not lead to any additional performance gains, but makes the algorithm more unstable due to increased number of updates per data collection rollout.
                 </h2>
             </td>
           </tr>
@@ -86,7 +86,7 @@
           <tr>
             <td>
                 <h2 class="subtitle">
-                    We test different methods for exploration such as RND and DIAYN-based rewards and observed that these methods obtain similar subpar performance as in PPO. To use DIAYN in our setting, we use it as an additive intrinsic reward trying to generate diversity in the policies, although we could not find any prior work that does so. To the best of our knowledge, DIAYN-based rewards are generally used to learn different skills and not maximize reward in a particular environment
+                    We test different methods for exploration such as RND and DIAYN-based rewards and observed that these methods obtain similar subpar performance as in PPO. To use DIAYN in our setting, we use it as an additive intrinsic reward trying to generate diversity in the policies, although we could not find any prior work that does so. To the best of our knowledge, DIAYN-based rewards are generally used to learn different skills and not maximize reward in a particular environment.
                     </h6>
                 </h2>
             </td>
