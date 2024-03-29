@@ -33,10 +33,10 @@
     <div class="container">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Rebuttal Videos and Plots</h1>
+          <h1 class="title is-1 publication-title">SAPG Rebuttal</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              Reviewer GK5F
+              Reviewer 3AyX
             </span>
           </div>
           </div>
@@ -48,121 +48,119 @@
 </section>
 
 
-<section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Utilizing the complete off-policy data</h2>
-          <tr>
-            <td>
-                <h2 class="subtitle">
-                    A way to use the complete data for off-policy updates instead of subsampling would be increase the number of mini epochs in an epochs and then use on-policy data combined with different off-policy data in each miniepochs. By appropriately setting the number of mini-epochs, we can use the complete off-policy data. We present the results in the figure below. We find that using the complete data does not lead to any additional performance gains.
-                </h2>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="row">
-                <div class="columns is-centered">
-                  <div class="column">
-                      <img src="../resources/all_data_plot.png" width="100%"/>
-                  </div>
+<section class="section" id="intr_rew">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">PPO with different exploration strategies</h2>
+        <tr>
+          <td>
+              <h2 class="subtitle">
+                  We test different methods for exploration such as RND and DIAYN-based rewards and observed that these methods obtain similar subpar performance as in PPO. To use DIAYN in our setting, we use it as an additive intrinsic reward trying to generate diversity in the policies, although we could not find any prior work that does so. To the best of our knowledge, DIAYN-based rewards are generally used to learn different skills and not maximize reward in a particular environment
+                  </h6>
+              </h2>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="row">
+              <div class="columns is-centered">
+                <div class="column">
+                    <img src="../resources/ppo_expl.png" width="100%"/>
                 </div>
               </div>
-              <br>
-            </td>
-          </tr>
-        </div> 
-      </div>
-    </div>
-  </section>
-
-
-  <section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">PPO with other other exploration methods</h2>
-          <tr>
-            <td>
-                <h2 class="subtitle">
-                  We test different methods for exploration such as RND and DIAYN-based rewards, however we observed that these methods obtain similar subpar performance as is obtained through simple PPO.
-                  <h6 class="subtitle">Note that, to the best of our knowledge, DIAYN-based rewards are generally used to learn different skills and not maximize reward in a particular environment. To use DIAYN in our setting, we use it as an additive intrinsic reward trying to generate diversity in the policies, although we did not find an prior work that does so.</h6>
-                </h2>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="row">
-                <div class="columns is-centered">
-                  <div class="column">
-                      <img src="../resources/ppo_expl.png" width="100%"/>
-                  </div>
-                </div>
-              </div>
-              <br>
-            </td>
-          </tr>
-        </div> 
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Evaluating diversity of states</h2>
-          <tr>
-            <td>
-                <h2 class="subtitle">
-                    We also quantitatively analyze the diversity of states visited by our method during training.  We compute the generalized variance of the observation data points which is defined as the determinant of the covariance matrix of a sample batch of observations. We compare this for a batch of states visited during training our method as well as for PPO.
-                </h2>
-            </td>
-          </tr>
-          <tr>
-            <td>
-                <div class="row">
-                    <div class="columns is-centered" style="width: 100%">
-                        <div class="column">
-                            <table class="table is-bordered is-striped is-narrow is-hoverable" style="margin-left: auto; margin-right: auto;">
-                                <thead>
-                                    <tr>
-                                        <th>Method</th>
-                                        <th>Regrasping</th>
-                                        <th>Throw</th>
-                                        <th>Reorientation</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>SAPG</td>
-                                        <td>0.5</td>
-                                        <td>100.12</td>
-                                        <td>1154.41</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PPO</td>
-                                        <td>0.4</td>
-                                        <td>1.77</td>
-                                        <td>1.8473</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Random policy</td>
-                                        <td>0.4</td>
-                                        <td>1.93e-07</td>
-                                        <td>0.23</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </td>
+            </div>
+            <br>
+          </td>
         </tr>
       </div> 
     </div>
   </div>
+</section>
+
+<section class="section" id="diversity">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Measuring diversity</h2>
+        <tr>
+          <td>
+              <h2 class="subtitle">
+                  We also quantitatively analyze the diversity of states visited by our method during training using two different methods. The first involves using PCA and plotting reconstruction error against number of PCA components used. <br> The second method involves training an smaller MLP to reconstruct inputs and evaluating training error on batches of states from different methods.
+              </h2>
+          </td>
+        </tr>
+        <!-- <tr>
+          <td>
+              <div class="row">
+                  <div class="columns is-centered" style="width: 100%">
+                      <div class="column">
+                          <table class="table is-bordered is-striped is-narrow is-hoverable" style="margin-left: auto; margin-right: auto;">
+                              <thead>
+                                  <tr>
+                                      <th>Method</th>
+                                      <th>Regrasping</th>
+                                      <th>Throw</th>
+                                      <th>Reorientation</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>SAPG</td>
+                                      <td>0.5</td>
+                                      <td>100.12</td>
+                                      <td>1154.41</td>
+                                  </tr>
+                                  <tr>
+                                      <td>PPO</td>
+                                      <td>0.4</td>
+                                      <td>1.77</td>
+                                      <td>1.8473</td>
+                                  </tr>
+                                  <tr>
+                                      <td>Random policy</td>
+                                      <td>0.4</td>
+                                      <td>1.93e-07</td>
+                                      <td>0.23</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </td>
+      </tr> -->
+      <tr>
+          <td>
+            <div class="row">
+              <div class="columns is-centered">
+                <div class="column">
+                    <img src="../resources/PCA_div.png" width="100%"/>
+                    <p></p>
+                    <p style="text-align: center;">PCA based analysis</p>
+                </div>
+              </div>
+            </div>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="row">
+              <div class="columns is-centered">
+                <div class="column">
+                    <img src="../resources/MLP_div.png" width="100%"/>
+                    <p></p>
+                    <p style="text-align: center;">MLP reconstruction based analysis</p>
+                </div>
+              </div>
+            </div>
+            <br>
+          </td>
+        </tr>
+    </div> 
+  </div>
+</div>
 </section>
 </body>
 </html>
