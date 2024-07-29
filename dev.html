@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BM130PWZB5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-BM130PWZB5');
+  </script>
+  <meta charset="utf-8">
+  <meta name="description" content="SAPG: Split and Aggregate Policy Gradients">
+  <meta name="keywords" content="Robotics, Simulation, Reinforcement Learning, Large-Scale, Policy gradients">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAPG: Split and Aggregate Policy Gradients</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="./static/js/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+  <script src="./static/js/isInViewport.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link rel="icon" href="./favicon.ico?">
+
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body no-bottom-padding">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">SAPG: Split and Aggregate Policy Gradients</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Jayesh Singla <sup>*</sup>
+              </span>
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              <span class="author-block">
+                Ananye Agarwal <sup>*</sup>
+              </span>
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              &nbsp;
+              <span class="author-block">
+                Deepak Pathak
+              </span>
+              <br />Carnegie Mellon University
+              <span class="brmod" style="color:rgb(96, 1, 1)"><b>ICML 2024 (Oral)</b></span>
+            </div>
+            <div class="column has-text-centered">
+            <div class="publication-links">
+            <span class="link-block">
+                <a target="_blank" href="/resources/2024_icml_sapg.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+            <!-- arXiv Link. -->
+            <span class="link-block">
+                <a target="_blank" href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            <!-- OpenReview Link. -->
+            <!-- <span class="link-block">
+                <a target="_blank" href="https://openreview.net/forum?id=Re3NjSwf0WF"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <img src="resources/openreview.ico"></img>
+                  </span>
+                  <span>Reviews</span>
+                </a>
+              </span> -->
+            <!-- Video Link. -->
+            <!-- <span class="link-block">
+                <a target="_blank" href="https://youtu.be/5sRqythe6TE"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+            <!-- twitter Link. -->
+            <span class="link-block">
+                <a target="_blank" href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>Summary</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a target="_blank" href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+            
+          </div>
+
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="padding-bottom: 0">
+    <div class="container">
+      <div id="method_figure" class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds no-bottom-padding">
+          <!-- <video controls src="./camera-ready-video-v2-compressed.mp4" style="border: 1px solid #bbb; border-radius: 10px; width: 100%;"> -->
+           <img src="./resources/teaser.png">
+        </div>
+      </div>
+
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-two-thirds">
+          <h2 class="title is-2">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Despite extreme sample inefficiency, on-policy reinforcement learning, aka policy gradients, has become a fundamental tool in decision-making problems. With the recent advances in GPU-driven simulation, the ability to collect large amounts of data for RL training has scaled exponentially. However, we show that current RL methods, e.g. PPO, fail to ingest the benefit of parallelized environments beyond a certain point and their performance saturates. To address this, we propose a new on-policy RL algorithm that can effectively leverage large-scale environments by splitting them into chunks and fusing them back together via importance sampling. Our algorithm, termed SAPG, shows significantly higher performance across a variety of challenging environments where vanilla PPO and other strong baselines fail to achieve high performance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--/ Paper video. -->
+    <br />
+    <br />
+
+  </section>
+
+  <section class="section" style="align-items:center;">
+    <div class="container" style="width: 90%;">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">The Pipeline</h2>
+          <tr>
+            <td>
+              <h2 class="subtitle">
+                <br/>
+              </h2>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <img src="./resources/method.png" width="100%" style="border: 1px solid #bbb; border-radius: 10px; width: 100%; padding: 10px;">
+              </div>
+              <!-- <div class="row">
+              <div class="col">
+                  <video playsinline autoplay loop muted src="./resources/stepping_stones/long-2_compressed.MOV" width="100%"
+                         style="border-radius:10px; "></video>
+              </div>
+              <div class="col">
+                <video playsinline autoplay loop muted src="./resources/stepping_stones/9_compressed.MOV" width="100%"
+                       style="border-radius:10px; "></video>
+              </div>
+            </div> -->
+            </td>
+          </tr>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="align-items:center;">
+    <div class="container" style="width: 90%;">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">SAPG vs PPO</h2>
+          <tr>
+            <td>
+              <h2 class="subtitle">
+                SAPG is able to make much larger progress in solving complex tasks compared to PPO.
+              </h2>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col">
+                    <p style="text-align: center;font-weight: bolder;font-size: 16pt;">SAPG</p>
+                </div>
+                <div class="col">
+                  <p style="text-align: center;font-weight: bolder;font-size: 16pt;">PPO</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted src="./resources/result_vids_mp4/reorientation_sapg.mp4" width="100%"
+                          style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted src="./resources/result_vids_mp4/reorientation_ppo.mp4" width="100%"
+                        style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ours_two_arm_reorientation.mp4" width="100%"
+                          style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ppo_two_arms_reorientation.mp4" width="100%"
+                        style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ours_two_arm_regrasping.mp4" width="100%"
+                          style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ppo_two_arm_regrasping.mp4" width="100%"
+                        style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <div class="row">
+                <p style="text-align: center;">In the representative tasks shown above, PPO struggles to reach within a tolerable margin while also keeps dropping the block to be manipulated. SAPG on the other hand is able to effectively perform the task maneuvers consecutively.</p>
+              </div>
+            </td>
+          </tr>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="align-items:center;">
+    <div class="container" style="width: 90%;">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Qualitative performance</h2>
+          <tr>
+            <td>
+              <h2 class="subtitle">
+                Qualitatively, we observe that the policy learned by our method exhibits a high success rate in all challenging environments.
+              </h2>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted src="./resources/result_vids_mp4/allegro_sapg.mp4" width="100%"
+                          style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted src="/resources/result_vids_mp4/ours_regrasping.mp4" width="100%"
+                        style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted src="/resources/result_vids_mp4/ours_two_arm_reorientation.mp4" width="100%"
+                        style="border-radius:10px; "></video>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                    <video playsinline autoplay loop muted src="./resources/result_vids_mp4/throw_sapg.mp4" width="100%"
+                          style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted src="/resources/result_vids_mp4/shadow_sapg.mp4" width="100%"
+                        style="border-radius:10px; "></video>
+                </div>
+                <div class="col">
+                  <video playsinline autoplay loop muted src="/resources/result_vids_mp4/reorientation_sapg.mp4" width="100%"
+                        style="border-radius:10px; "></video>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="align-items:center;">
+    <div class="container" style="width: 90%;">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Quantitative Performance</h2>
+          <tr>
+            <td>
+              <h2 class="subtitle">
+                Our method is able to beat the existing state-of-the-art methods on a variety of challenging robotic tasks in simulation. We observe faster policy improvement as well as a higher asymptotic performance over 5 different hard environments.
+              </h2>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <img src="./resources/main_plot.svg" width="100%" style="border-radius:10px;">
+              </div>
+              <br>
+              <!-- <div class="row">
+              <div class="col">
+                  <video playsinline autoplay loop muted src="./resources/stepping_stones/long-2_compressed.MOV" width="100%"
+                         style="border-radius:10px; "></video>
+              </div>
+              <div class="col">
+                <video playsinline autoplay loop muted src="./resources/stepping_stones/9_compressed.MOV" width="100%"
+                       style="border-radius:10px; "></video>
+              </div>
+            </div> -->
+            </td>
+          </tr>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="align-items:center;" id="diversity">
+    <div class="container" style="width: 90%;">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Measuring diversity</h2>
+          <tr>
+            <td>
+                <h2 class="subtitle">
+                    We also quantitatively analyze the diversity of states visited by our method during training using two different methods. The first involves using PCA and plotting reconstruction error against number of PCA components used. The second method involves training an smaller MLP to reconstruct inputs and evaluating training error on batches of states from different methods.
+                </h2>
+            </td>
+          </tr>
+          <!-- <tr>
+            <td>
+                <div class="row">
+                    <div class="columns is-centered" style="width: 100%">
+                        <div class="column">
+                            <table class="table is-bordered is-striped is-narrow is-hoverable" style="margin-left: auto; margin-right: auto;">
+                                <thead>
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Regrasping</th>
+                                        <th>Throw</th>
+                                        <th>Reorientation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SAPG</td>
+                                        <td>0.5</td>
+                                        <td>100.12</td>
+                                        <td>1154.41</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PPO</td>
+                                        <td>0.4</td>
+                                        <td>1.77</td>
+                                        <td>1.8473</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Random policy</td>
+                                        <td>0.4</td>
+                                        <td>1.93e-07</td>
+                                        <td>0.23</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr> -->
+        <tr>
+            <td>
+              <div class="row">
+                <div class="columns is-centered">
+                  <div class="column">
+                      <img src="../resources/PCA_div.png" width="100%"/>
+                      <p></p>
+                      <p style="text-align: center;">PCA based analysis</p>
+                  </div>
+                </div>
+              </div>
+              <br>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="columns is-centered">
+                  <div class="column">
+                      <img src="../resources/MLP_div.png" width="100%"/>
+                      <p></p>
+                      <p style="text-align: center;">MLP reconstruction based analysis</p>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+      </div> 
+    </div>
+  </div>
+  </section>
+  <section class="section" style="align-items:center;">
+    <div class="container" style="width: 90%;">
+    <h2 class="title is-2" style="text-align: center;">BibTex</h2>
+  <div id="bibtex-citation" class="tab-content">
+      <pre><code> @inproceedings{sapg2024,
+  title     = {SAPG: Split and Aggregate Policy Gradients},
+  author    = {Singla, Jayesh and Agarwal, Ananye and Pathak, Deepak},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning (ICML 2024)},
+  year      = {2024},
+  series    = {Proceedings of Machine Learning Research},
+  address   = {Vienna, Austria},
+  month     = {July},
+  publisher = {PMLR},
+}</code></pre>
+</div>
+    </div>
+  </section>
+  
+</body>
+
+<script>
+  var mainLoopId = setInterval(function () {
+    $('video').not('#teaser').each(function () {
+      if ($(this).is(":in-viewport")) {
+        $(this)[0].play();
+      } else {
+        $(this)[0].pause();
+      }
+    })
+  }, 200);
+</script>
+
+</html>
