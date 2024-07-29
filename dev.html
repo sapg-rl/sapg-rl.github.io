@@ -232,15 +232,16 @@
           </tr>
           <tr>
             <td>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col">
                     <p style="text-align: center;font-weight: bolder;font-size: 16pt;">SAPG</p>
                 </div>
                 <div class="col">
                   <p style="text-align: center;font-weight: bolder;font-size: 16pt;">PPO</p>
                 </div>
-              </div>
+              </div> -->
               <div class="row">
+                <h2 class="title">Reorientation</h2>
                 <div class="col">
                     <video playsinline autoplay loop muted src="./resources/result_vids_mp4/reorientation_sapg.mp4" width="100%"
                           style="border-radius:10px; "></video>
@@ -249,8 +250,12 @@
                   <video playsinline autoplay loop muted src="./resources/result_vids_mp4/reorientation_ppo.mp4" width="100%"
                         style="border-radius:10px; "></video>
                 </div>
+                <p>The task above is a fairly complex task involving a 7 DoF arm and a 16 DoF hand. It is challenging because the target pose may require picking up the block in a certain way.The difficulty is further increased by the fact that we need to complete the task consecutively which require in hand adjustment of the grip or placing the block on the table and picking it up again.
+                  
+                  <span style="font-weight: bold;">PPO (right)</span> struggles to reach within a tolerable margin while also keeps dropping the block to be manipulated. <span style="font-weight: bold;">SAPG (left)</span>, on the other hand, is able to effectively perform the task maneuvers consecutively.</p>
               </div>
               <div class="row">
+                <h2 class="title">Two Arms Reorientation</h2>
                 <div class="col">
                     <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ours_two_arm_reorientation.mp4" width="100%"
                           style="border-radius:10px; "></video>
@@ -259,8 +264,12 @@
                   <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ppo_two_arms_reorientation.mp4" width="100%"
                         style="border-radius:10px; "></video>
                 </div>
+                <p>The task above is even more complex due to the addition of another 23 DoF arm+hand setup. The difficulty is increased further because some target poses may require transferring the block between the two arms.
+                  
+                  Again, <span style="font-weight: bold;">PPO (right)</span> has trouble reaching the exact orientation while also keeps dropping the block to be manipulated. <span style="font-weight: bold;">SAPG (left)</span> is able to effectively perform the task maneuvers consecutively, robustly transferring the block between the arms when needed.</p>
               </div>
               <div class="row">
+                <h2 class="title">Two Arms Regrasping</h2>
                 <div class="col">
                     <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ours_two_arm_regrasping.mp4" width="100%"
                           style="border-radius:10px; "></video>
@@ -269,9 +278,7 @@
                   <video playsinline autoplay loop muted src="./resources/result_vids_mp4/ppo_two_arm_regrasping.mp4" width="100%"
                         style="border-radius:10px; "></video>
                 </div>
-              </div>
-              <div class="row">
-                <p style="text-align: center;">In the representative tasks shown above, PPO struggles to reach within a tolerable margin while also keeps dropping the block to be manipulated. SAPG on the other hand is able to effectively perform the task maneuvers consecutively.</p>
+                <p> This is a simpler version of the Two Arm Reorientation task where we need to reach a target position instead of a pose. Here too, <span style="font-weight: bold;">PPO (right)</span> performs much worse than <span style="font-weight: bold;">SAPG (left)</span></p>
               </div>
             </td>
           </tr>
@@ -284,7 +291,7 @@
     <div class="container" style="width: 90%;">
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Qualitative performance</h2>
+          <h2 class="title is-2" style="text-align: center; padding-bottom: 10px;">Performance across robotic environments</h2>
           <tr>
             <td>
               <h2 class="subtitle">
